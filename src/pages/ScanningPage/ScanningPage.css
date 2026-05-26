@@ -1,0 +1,115 @@
+/* ScanningPage.css */
+.sc-root {
+  min-height: 100vh;
+  background: var(--bg-primary);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sc-bg { position: fixed; inset: 0; pointer-events: none; z-index: 0; }
+.sc-orb { position: absolute; border-radius: 50%; filter: blur(100px); opacity: 0.3; }
+.sc-orb-1 { width: 700px; height: 700px; background: radial-gradient(circle, rgba(124,58,237,0.2), transparent); top: -300px; left: -200px; }
+.sc-orb-2 { width: 500px; height: 500px; background: radial-gradient(circle, rgba(6,182,212,0.15), transparent); bottom: -200px; right: -150px; }
+.sc-orb-3 { width: 300px; height: 300px; background: radial-gradient(circle, rgba(16,185,129,0.1), transparent); top: 40%; left: 50%; }
+
+.sc-particles { position: fixed; inset: 0; pointer-events: none; z-index: 0; }
+.sc-particle {
+  position: absolute;
+  width: 3px; height: 3px;
+  background: rgba(124,58,237,0.4);
+  border-radius: 50%;
+  animation: float 6s ease-in-out infinite;
+}
+
+.sc-center {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 24px;
+  max-width: 600px;
+  width: 100%;
+  gap: 28px;
+}
+
+.sc-header { text-align: center; }
+.sc-pill {
+  display: inline-block;
+  background: rgba(124,58,237,0.12);
+  border: 1px solid rgba(124,58,237,0.3);
+  color: var(--accent-purple-light);
+  font-size: 0.8rem; font-weight: 700; letter-spacing: 0.06em;
+  padding: 5px 14px; border-radius: 999px; margin-bottom: 12px;
+}
+.sc-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 4vw, 2.2rem);
+  font-weight: 800; color: var(--text-primary); margin-bottom: 6px;
+}
+.sc-sub { font-size: 0.85rem; color: var(--text-muted); }
+
+/* Ring */
+.sc-ring-wrap { position: relative; width: 160px; height: 160px; }
+.sc-ring-svg { width: 100%; height: 100%; }
+.sc-ring-inner {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+}
+.sc-pct { font-family: var(--font-display); font-size: 2.2rem; font-weight: 800; color: var(--text-primary); line-height: 1; }
+.sc-pct-label { font-size: 0.72rem; color: var(--text-muted); letter-spacing: 0.08em; margin-top: 2px; }
+
+/* Steps */
+.sc-steps { width: 100%; display: flex; flex-direction: column; gap: 10px; }
+.sc-step {
+  display: flex; align-items: center; gap: 12px;
+  padding: 12px 16px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  transition: all 0.3s ease;
+  opacity: 0.5;
+}
+.sc-step--active { opacity: 1; border-color: rgba(124,58,237,0.4); background: rgba(124,58,237,0.06); }
+.sc-step--done { opacity: 1; border-color: rgba(16,185,129,0.3); background: rgba(16,185,129,0.04); }
+.sc-step-icon { flex-shrink: 0; }
+.sc-step--done .sc-step-icon { color: var(--accent-emerald); }
+.sc-step--active .sc-step-icon { color: var(--accent-purple-light); }
+.sc-step-label { flex: 1; font-size: 0.875rem; color: var(--text-secondary); }
+.sc-step--done .sc-step-label { color: var(--text-primary); }
+.sc-step--active .sc-step-label { color: var(--text-primary); font-weight: 500; }
+.sc-step-check { font-size: 0.75rem; color: var(--accent-emerald); font-weight: 700; }
+.sc-spin { animation: spin 1s linear infinite; }
+
+/* Terminal */
+.sc-terminal {
+  width: 100%;
+  background: rgba(0,0,0,0.6);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  max-height: 160px;
+}
+.sc-terminal-bar {
+  display: flex; align-items: center; gap: 6px;
+  padding: 10px 14px;
+  background: rgba(255,255,255,0.04);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.sc-dot { width: 10px; height: 10px; border-radius: 50%; }
+.sc-dot-red { background: #ef4444; }
+.sc-dot-yellow { background: #f59e0b; }
+.sc-dot-green { background: #10b981; }
+.sc-terminal-title { font-size: 0.72rem; color: var(--text-muted); margin-left: 6px; font-family: monospace; }
+.sc-terminal-body { padding: 12px 14px; max-height: 120px; overflow-y: auto; }
+.sc-log-line { font-family: 'Courier New', monospace; font-size: 0.75rem; color: #6ee7b7; margin-bottom: 4px; animation: fadeIn 0.3s ease; }
+.sc-cursor { font-family: monospace; font-size: 0.85rem; color: var(--accent-cyan); animation: blink 1s step-end infinite; }
+@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+@media (max-width: 640px) {
+  .sc-center { padding: 24px 16px; gap: 20px; }
+}

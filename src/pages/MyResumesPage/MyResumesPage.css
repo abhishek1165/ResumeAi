@@ -1,0 +1,634 @@
+/* ============================================
+   MyResumesPage Styles
+   ============================================ */
+
+.myr-page {
+  min-height: 100vh;
+  background: var(--bg-primary);
+  padding-bottom: 80px;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Background */
+.myr-bg {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.myr-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+  opacity: 0.1;
+}
+
+.myr-orb--purple {
+  width: 600px;
+  height: 600px;
+  background: var(--accent-purple);
+  top: -200px;
+  left: -200px;
+}
+
+.myr-orb--cyan {
+  width: 400px;
+  height: 400px;
+  background: var(--accent-cyan);
+  top: 200px;
+  right: -150px;
+}
+
+.myr-orb--emerald {
+  width: 350px;
+  height: 350px;
+  background: var(--accent-emerald);
+  bottom: -100px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* ============================================
+   PAGE HEADER
+   ============================================ */
+.myr-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding-top: 60px;
+  padding-bottom: 40px;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.myr-header__text {
+  animation: fadeInUp 0.6s ease forwards;
+}
+
+.myr-header__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--accent-purple-light);
+  background: rgba(124, 58, 237, 0.1);
+  border: 1px solid rgba(124, 58, 237, 0.2);
+  padding: 5px 12px;
+  border-radius: var(--radius-full);
+  margin-bottom: 16px;
+}
+
+.myr-page-title {
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  line-height: 1.1;
+  margin-bottom: 10px;
+}
+
+.myr-page-subtitle {
+  font-size: 1rem;
+  color: var(--text-secondary);
+}
+
+.myr-upload-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  background: var(--gradient-primary);
+  border: none;
+  border-radius: var(--radius-md);
+  color: #fff;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-base);
+  white-space: nowrap;
+  align-self: center;
+  box-shadow: 0 4px 20px rgba(124, 58, 237, 0.3);
+}
+
+.myr-upload-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(124, 58, 237, 0.5);
+}
+
+/* ============================================
+   STATS ROW
+   ============================================ */
+.myr-stats-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 48px;
+}
+
+.myr-stat-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px;
+  animation: fadeInUp 0.5s ease forwards;
+  opacity: 0;
+  animation-fill-mode: forwards;
+}
+
+.myr-stat-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.myr-stat-icon--purple { background: rgba(124, 58, 237, 0.15); color: var(--accent-purple-light); }
+.myr-stat-icon--cyan   { background: rgba(6, 182, 212, 0.12); color: var(--accent-cyan-light); }
+.myr-stat-icon--emerald{ background: rgba(16, 185, 129, 0.12); color: var(--accent-emerald-light); }
+.myr-stat-icon--amber  { background: rgba(245, 158, 11, 0.12); color: #fbbf24; }
+
+.myr-stat-label {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  margin-bottom: 4px;
+}
+
+.myr-stat-value {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  font-weight: 800;
+  line-height: 1;
+  margin-bottom: 3px;
+}
+
+.myr-stat-value--purple { color: var(--accent-purple-light); }
+.myr-stat-value--cyan   { color: var(--accent-cyan-light); }
+.myr-stat-value--emerald{ color: var(--accent-emerald-light); }
+.myr-stat-value--amber  { color: #fbbf24; }
+
+.myr-stat-sub {
+  font-size: 0.73rem;
+  color: var(--text-muted);
+}
+
+/* ============================================
+   MAIN GRID
+   ============================================ */
+.myr-main-grid {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 32px;
+  align-items: start;
+}
+
+.myr-left {
+  display: flex;
+  flex-direction: column;
+}
+
+.myr-right {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  position: sticky;
+  top: 80px;
+}
+
+/* Section Header */
+.myr-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.myr-section-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.myr-section-count {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-subtle);
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+}
+
+/* ============================================
+   RESUME CARDS GRID
+   ============================================ */
+.myr-resumes-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.myr-resume-card {
+  display: flex;
+  flex-direction: column;
+  padding: 18px;
+  animation: fadeInUp 0.5s ease forwards;
+  opacity: 0;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  cursor: default;
+}
+
+.myr-resume-card--deleting {
+  opacity: 0 !important;
+  transform: scale(0.95) !important;
+}
+
+.myr-resume-card__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.myr-resume-file-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-sm);
+  background: rgba(124, 58, 237, 0.12);
+  border: 1px solid rgba(124, 58, 237, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent-purple-light);
+}
+
+.myr-score-ring {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.myr-score-ring__value {
+  position: absolute;
+  font-size: 10px;
+  font-weight: 800;
+  font-family: var(--font-display);
+}
+
+.myr-resume-card__body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.myr-resume-name {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.myr-resume-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+}
+
+.myr-resume-meta span {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Status Badge */
+.myr-status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: var(--radius-full);
+  width: fit-content;
+}
+
+.badge--green {
+  background: rgba(16, 185, 129, 0.12);
+  color: var(--accent-emerald-light);
+  border: 1px solid rgba(16, 185, 129, 0.25);
+}
+
+.badge--amber {
+  background: rgba(245, 158, 11, 0.12);
+  color: #fbbf24;
+  border: 1px solid rgba(245, 158, 11, 0.25);
+}
+
+.badge--blue {
+  background: rgba(37, 99, 235, 0.12);
+  color: #60a5fa;
+  border: 1px solid rgba(37, 99, 235, 0.25);
+}
+
+/* Card Actions */
+.myr-resume-card__actions {
+  display: flex;
+  gap: 6px;
+}
+
+.myr-card-btn {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 10px;
+  border-radius: var(--radius-sm);
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: all var(--transition-fast);
+}
+
+.myr-card-btn--view {
+  background: rgba(6, 182, 212, 0.1);
+  color: var(--accent-cyan-light);
+  border: 1px solid rgba(6, 182, 212, 0.2);
+  flex: 1;
+}
+
+.myr-card-btn--view:hover {
+  background: rgba(6, 182, 212, 0.2);
+}
+
+.myr-card-btn--analyze {
+  background: rgba(124, 58, 237, 0.1);
+  color: var(--accent-purple-light);
+  border: 1px solid rgba(124, 58, 237, 0.2);
+  flex: 1;
+}
+
+.myr-card-btn--analyze:hover {
+  background: rgba(124, 58, 237, 0.2);
+}
+
+.myr-card-btn--delete {
+  background: rgba(239, 68, 68, 0.08);
+  color: var(--accent-red-light);
+  border: 1px solid rgba(239, 68, 68, 0.15);
+  padding: 6px 8px;
+}
+
+.myr-card-btn--delete:hover {
+  background: rgba(239, 68, 68, 0.18);
+}
+
+/* ============================================
+   AI INSIGHTS
+   ============================================ */
+.myr-insights-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.myr-insight-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 18px;
+}
+
+.myr-insight-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.myr-insight-icon--purple {
+  background: rgba(124, 58, 237, 0.15);
+  color: var(--accent-purple-light);
+}
+
+.myr-insight-icon--cyan {
+  background: rgba(6, 182, 212, 0.12);
+  color: var(--accent-cyan-light);
+}
+
+.myr-insight-icon--emerald {
+  background: rgba(16, 185, 129, 0.12);
+  color: var(--accent-emerald-light);
+}
+
+.myr-insight-title {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 5px;
+}
+
+.myr-insight-body {
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  line-height: 1.55;
+}
+
+/* ============================================
+   ACTIVITY PANEL
+   ============================================ */
+.myr-activity-panel {
+  padding: 20px;
+}
+
+.myr-activity-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 20px;
+  color: var(--text-primary);
+  font-weight: 700;
+  font-size: 0.95rem;
+  font-family: var(--font-display);
+}
+
+.myr-activity-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.myr-activity-item {
+  display: flex;
+  gap: 12px;
+  animation: fadeInUp 0.4s ease forwards;
+  opacity: 0;
+}
+
+.myr-activity-item__left {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+
+.myr-act-icon {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.act-icon--green   { background: rgba(16,185,129,0.15); color: var(--accent-emerald-light); }
+.act-icon--purple  { background: rgba(124,58,237,0.15); color: var(--accent-purple-light); }
+.act-icon--cyan    { background: rgba(6,182,212,0.12); color: var(--accent-cyan-light); }
+.act-icon--blue    { background: rgba(37,99,235,0.12); color: #60a5fa; }
+
+.myr-activity-line {
+  flex: 1;
+  width: 1px;
+  background: var(--border-subtle);
+  margin: 4px 0;
+  min-height: 16px;
+}
+
+.myr-activity-item:last-child .myr-activity-line {
+  display: none;
+}
+
+.myr-activity-item__content {
+  padding-bottom: 16px;
+  flex: 1;
+}
+
+.myr-activity-action {
+  font-size: 0.83rem;
+  color: var(--text-secondary);
+  margin-bottom: 3px;
+}
+
+.myr-activity-file {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.myr-activity-time {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+}
+
+/* ============================================
+   TIPS CARD
+   ============================================ */
+.myr-tips-card {
+  padding: 20px;
+}
+
+.myr-tips-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  font-family: var(--font-display);
+  color: var(--text-primary);
+}
+
+.myr-tips-star {
+  color: #fbbf24;
+}
+
+.myr-tips-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.myr-tips-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+.myr-tips-list li svg {
+  color: var(--accent-emerald);
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (max-width: 1200px) {
+  .myr-stats-row {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 1024px) {
+  .myr-main-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .myr-right {
+    position: static;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  .myr-resumes-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .myr-stats-row {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .myr-right {
+    grid-template-columns: 1fr;
+  }
+
+  .myr-page-title {
+    font-size: 1.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .myr-resumes-grid {
+    grid-template-columns: 1fr;
+  }
+}
