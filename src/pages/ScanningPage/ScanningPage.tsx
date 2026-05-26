@@ -2,7 +2,9 @@ import { useEffect, useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { CheckCircle, Clock, Loader } from 'lucide-react';
 import { useResume, generateAnalysis } from '../../context/ResumeContext';
+import { useAuth } from '../../context/AuthContext';
 import './ScanningPage.css';
+
 
 const SCAN_STEPS = [
   { label: 'Parsing document structure', duration: 1200 },
@@ -31,6 +33,8 @@ const LOG_MESSAGES = [
 export default function ScanningPage() {
   const navigate = useNavigate();
   const { file, setAnalysis } = useResume();
+  const { isAuthenticated } = useAuth();
+
 
   const [completedSteps, setCompletedSteps] = useState<number[]>([]);
   const [currentStep, setCurrentStep] = useState(0);
@@ -39,12 +43,11 @@ export default function ScanningPage() {
   const [done, setDone] = useState(false);
   const logRef = useRef<HTMLDivElement>(null);
 
-  // Redirect if no file
+  // Redirect if no file — go to upload (public)
   useEffect(() => {
-    if (!file) {
-      navigate('/upload');
-    }
+    if (!file) navigate('/upload');
   }, [file, navigate]);
+
 
   // Run scan steps
   useEffect(() => {
@@ -64,30 +67,30 @@ export default function ScanningPage() {
 
     const runStep = (i: number) => {
       if (i >= SCAN_STEPS.length) {
-        // Done — generate analysis
         addLog(LOG_MESSAGES[LOG_MESSAGES.length - 1]);
+        // Decide destination: authenticated → dashboard, guest → results
+        const dest = isAuthenticated ? '/dashboard' : '/results';
         const reader = new FileReader();
         reader.onload = (ev) => {
           const text = ev.target?.result as string || '';
           const analysis = generateAnalysis(file, text);
           setAnalysis(analysis);
           setDone(true);
-          setTimeout(() => navigate('/dashboard'), 1500);
+          setTimeout(() => navigate(dest), 1500);
         };
         reader.onerror = () => {
           const analysis = generateAnalysis(file, '');
           setAnalysis(analysis);
           setDone(true);
-          setTimeout(() => navigate('/dashboard'), 1500);
+          setTimeout(() => navigate(dest), 1500);
         };
-        // Try to read as text
         try {
           reader.readAsText(file);
         } catch {
           const analysis = generateAnalysis(file, '');
           setAnalysis(analysis);
           setDone(true);
-          setTimeout(() => navigate('/dashboard'), 1500);
+          setTimeout(() => navigate(dest), 1500);
         }
         return;
       }

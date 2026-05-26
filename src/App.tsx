@@ -10,6 +10,7 @@ import SignupPage from './pages/SignupPage/SignupPage';
 import ForgotPasswordPage from './pages/ForgotPasswordPage/ForgotPasswordPage';
 import UploadPage from './pages/UploadPage/UploadPage';
 import ScanningPage from './pages/ScanningPage/ScanningPage';
+import ResultsPage from './pages/ResultsPage/ResultsPage';
 import DashboardPage from './pages/DashboardPage/DashboardPage';
 import WorkspacePage from './pages/WorkspacePage/WorkspacePage';
 import PreviewPage from './pages/PreviewPage/PreviewPage';
@@ -19,11 +20,11 @@ import PricingPage from './pages/PricingPage/PricingPage';
 import SettingsPage from './pages/SettingsPage/SettingsPage';
 import './styles/globals.css';
 
-// Pages that shouldn't show the global navbar
+// Pages that don't show the global navbar (they have their own)
 const NO_NAVBAR_PATHS = [
-  '/',  // Landing page has its own navbar
+  '/',
   '/login', '/signup', '/forgot-password',
-  '/scanning', '/dashboard', '/workspace',
+  '/scanning', '/results', '/dashboard', '/workspace',
   '/settings', '/my-resumes', '/preview', '/upload',
 ];
 
@@ -45,44 +46,43 @@ const AppLayout: React.FC = () => {
     <>
       {showNavbar && <Navbar />}
       <Routes>
-        {/* Public routes */}
-        <Route path="/" element={<LandingPage />} />
+        {/* ── Public marketing routes ── */}
+        <Route path="/"        element={<LandingPage />} />
         <Route path="/pricing" element={<PricingPage />} />
 
-        {/* Auth routes — redirect if already logged in */}
+        {/* ── Core product — no login required ── */}
+        <Route path="/upload"    element={<UploadPage />} />
+        <Route path="/scanning"  element={<ScanningPage />} />
+        <Route path="/results"   element={<ResultsPage />} />
+        <Route path="/job-match" element={<JobMatchPage />} />
+
+        {/* ── Auth pages (redirect if already logged in) ── */}
         <Route path="/login"           element={<AuthRoute><LoginPage /></AuthRoute>} />
         <Route path="/signup"          element={<AuthRoute><SignupPage /></AuthRoute>} />
         <Route path="/forgot-password" element={<AuthRoute><ForgotPasswordPage /></AuthRoute>} />
 
-        {/* Upload requires login */}
-        <Route path="/upload"   element={<ProtectedRoute><UploadPage /></ProtectedRoute>} />
-        <Route path="/scanning" element={<ProtectedRoute><ScanningPage /></ProtectedRoute>} />
+        {/* ── Account-only features ── */}
+        <Route path="/dashboard"  element={<ProtectedRoute><DashboardPage /></ProtectedRoute>} />
+        <Route path="/workspace"  element={<ProtectedRoute><WorkspacePage /></ProtectedRoute>} />
+        <Route path="/preview"    element={<ProtectedRoute><PreviewPage /></ProtectedRoute>} />
+        <Route path="/my-resumes" element={<ProtectedRoute><MyResumesPage /></ProtectedRoute>} />
+        <Route path="/settings"   element={<ProtectedRoute><SettingsPage /></ProtectedRoute>} />
 
-        {/* Protected dashboard area */}
-        <Route path="/dashboard"   element={<ProtectedRoute><DashboardPage /></ProtectedRoute>} />
-        <Route path="/workspace"   element={<ProtectedRoute><WorkspacePage /></ProtectedRoute>} />
-        <Route path="/preview"     element={<ProtectedRoute><PreviewPage /></ProtectedRoute>} />
-        <Route path="/my-resumes"  element={<ProtectedRoute><MyResumesPage /></ProtectedRoute>} />
-        <Route path="/job-match"   element={<ProtectedRoute><JobMatchPage /></ProtectedRoute>} />
-        <Route path="/settings"    element={<ProtectedRoute><SettingsPage /></ProtectedRoute>} />
-
-        {/* Catch-all */}
+        {/* ── Catch-all ── */}
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </>
   );
 };
 
-const App: React.FC = () => {
-  return (
-    <BrowserRouter>
-      <AuthProvider>
-        <ResumeProvider>
-          <AppLayout />
-        </ResumeProvider>
-      </AuthProvider>
-    </BrowserRouter>
-  );
-};
+const App: React.FC = () => (
+  <BrowserRouter>
+    <AuthProvider>
+      <ResumeProvider>
+        <AppLayout />
+      </ResumeProvider>
+    </AuthProvider>
+  </BrowserRouter>
+);
 
 export default App;

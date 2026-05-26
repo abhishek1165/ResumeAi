@@ -89,8 +89,7 @@ export default function LandingPage() {
 
   const handleAnalyze = () => {
     if (!heroFile) { fileInputRef.current?.click(); return; }
-    if (isAuthenticated) navigate('/scanning');
-    else navigate('/signup', { state: { from: '/scanning' } });
+    navigate('/scanning');
   };
 
   return (
