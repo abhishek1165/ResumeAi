@@ -2,12 +2,14 @@ import { useState, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import {
   Upload, X, Zap, ArrowRight, CheckCircle, XCircle,
-  BarChart3, Target, Layout, Star, ChevronDown,
-  Sparkles, Shield, Eye, FileText, Users,
+  BarChart3, Target, Layout, ChevronDown,
+  Sparkles, Shield,
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { useResume } from '../../context/ResumeContext';
 import './LandingPage.css';
+
+
 
 /* ─── Static mock data for the right-panel preview ─── */
 const SCORE_BARS = [
@@ -36,25 +38,20 @@ const FEATURES = [
   { icon: <Layout size={22} />, title: 'Full Dashboard', desc: 'Get actionable insights and track your improvement over time' },
 ];
 
-/* ─── ATS Ring ─── */
 function ATSRing({ score }: { score: number }) {
   const r = 70;
   const circ = 2 * Math.PI * r;
-  const offset = circ - (score / 100) * circ * 0.75; // 270° arc
   return (
     <svg viewBox="0 0 180 180" width="180" height="180">
       <circle cx="90" cy="90" r={r} fill="none" stroke="rgba(255,255,255,0.07)" strokeWidth="12"
         strokeDasharray={`${circ * 0.75} ${circ * 0.25}`}
-        strokeDashoffset={circ * 0.125}
         strokeLinecap="round"
         transform="rotate(135 90 90)" />
       <circle cx="90" cy="90" r={r} fill="none"
         stroke="url(#atsGrad)" strokeWidth="12"
-        strokeDasharray={`${circ * 0.75 - (score / 100) * circ * 0.75} 9999`}
-        strokeDashoffset={0}
         strokeLinecap="round"
         transform={`rotate(135 90 90)`}
-        style={{ transform: 'rotate(135deg)', transformOrigin: '90px 90px', strokeDasharray: `${(score / 100) * circ * 0.75} 9999`, transition: 'stroke-dasharray 1.5s ease' }}
+        style={{ transformOrigin: '90px 90px', strokeDasharray: `${(score / 100) * circ * 0.75} 9999`, transition: 'stroke-dasharray 1.5s ease' }}
       />
       <defs>
         <linearGradient id="atsGrad" x1="0%" y1="0%" x2="100%" y2="0%">
@@ -70,7 +67,7 @@ function ATSRing({ score }: { score: number }) {
 
 export default function LandingPage() {
   const navigate = useNavigate();
-  const { isAuthenticated, user, logout } = useAuth();
+  const { isAuthenticated, logout } = useAuth();
   const { setFile } = useResume();
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [heroFile, setHeroFile] = useState<File | null>(null);

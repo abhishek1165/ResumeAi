@@ -21,6 +21,7 @@ import './styles/globals.css';
 
 // Pages that shouldn't show the global navbar
 const NO_NAVBAR_PATHS = [
+  '/',  // Landing page has its own navbar
   '/login', '/signup', '/forgot-password',
   '/scanning', '/dashboard', '/workspace',
   '/settings', '/my-resumes', '/preview', '/upload',
@@ -36,7 +37,9 @@ function AuthRoute({ children }: { children: React.ReactNode }) {
 
 const AppLayout: React.FC = () => {
   const location = useLocation();
-  const showNavbar = !NO_NAVBAR_PATHS.some(p => location.pathname.startsWith(p));
+  const showNavbar = !NO_NAVBAR_PATHS.some(p =>
+    p === '/' ? location.pathname === '/' : location.pathname.startsWith(p)
+  );
 
   return (
     <>
